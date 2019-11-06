@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-4.22762393951416,"y":1.228384017944336,"z":8.428239822387696},"rotation":{"x":0.05874457210302353,"y":-0.9367159605026245,"z":0.19173258543014527,"w":0.28698667883872988},"size":16.621337890625,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-8.837335586547852,"y":-1.8849889039993287,"z":-8.896682739257813},"rotation":{"x":-0.03578915446996689,"y":0.9487515091896057,"z":-0.12480711191892624,"w":-0.2896864712238312},"size":16.525402069091798,"orthographic":false}
+>>>>>>> jack
