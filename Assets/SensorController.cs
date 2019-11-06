@@ -6,18 +6,17 @@ using UnityEngine.Networking;
 
 using SimpleJSON;
 
-public class SensorContoller : MonoBehaviour
+public class SensorController : MonoBehaviour
 {
 
     private string url = "https://bmgxwpyyd2.execute-api.us-east-1.amazonaws.com/prod/sensordata";
-    public string sensorID = "sensor1";
     private float nextActionTime = 0.0f;
     public float period = 1.0f;
-    public Text sensorText;
+    private JSONNode sensorValues;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetRequest(url + "?sensorID=" + sensorID));
+        StartCoroutine(GetRequest(url));
     }
 
     // Update is called once per frame
@@ -27,11 +26,22 @@ public class SensorContoller : MonoBehaviour
         if (Time.time > nextActionTime)
         {
             nextActionTime = Time.time + period;
-            StartCoroutine(GetRequest(url + "?" + sensorID));
+            StartCoroutine(GetRequest(url));
             // execute block of code here
         }
     }
 
+    public float GetSensorValue(string sensorID)
+    {
+        if (sensorValues[sensorID] != null)
+        {
+            return sensorValues[sensorID].AsFloat;
+        } else
+        {
+            Debug.LogError("\"" + sensorID + "\" is not a valid sensor ID.");
+            return 0;
+        }
+    }
 
     IEnumerator GetRequest(string uri)
     {
@@ -45,17 +55,15 @@ public class SensorContoller : MonoBehaviour
 
             if (webRequest.isNetworkError)
             {
-                Debug.Log(pages[page] + ": Error: " + webRequest.error);
+                Debug.LogError(pages[page] + ": Error: " + webRequest.error);
             }
             else
             {
                 Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                 var json = JSON.Parse(webRequest.downloadHandler.text);
-                string sensorValues = json["sensorValues"];
+                string sensorValuesString = json["sensorValues"];
 
-                var sensorValuesJson = JSON.Parse(sensorValues);
-                string sensorValue = sensorValuesJson[sensorID];
-                sensorText.text = sensorValue;
+                sensorValues = JSON.Parse(sensorValuesString);
             }
         }
     }

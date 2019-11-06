@@ -9,6 +9,7 @@ public class Sensor : MonoBehaviour
     public float fadeTime;
     public GameObject playerObject;
     public Color lineColour;
+    public string sensorID;
 
     private LineRenderer lineRenderer;
     private Text sensorText;
@@ -30,6 +31,7 @@ public class Sensor : MonoBehaviour
         RectTransform sensorTextTrans = sensorTextGO.AddComponent<RectTransform>();
         sensorTextTrans.anchoredPosition = new Vector2(0, 0);
         sensorTextTrans.localScale = new Vector3(5, 5, 1);
+        sensorTextTrans.sizeDelta = new Vector2(300, 60);
 
         sensorText = sensorTextGO.AddComponent<Text>();
         sensorText.color = new Color(0, 0, 0, 0);
@@ -62,7 +64,8 @@ public class Sensor : MonoBehaviour
         objPos.y = 0;
         playerPos.y = 0;
         float angle = Mathf.Atan2(objPos.z - playerPos.z, objPos.x - playerPos.x) * Mathf.Rad2Deg;
-        sensorText.text = angle.ToString();
+        float sensorValue = GameObject.FindGameObjectWithTag("SensorController").GetComponent<SensorController>().GetSensorValue(sensorID);
+        sensorText.text = sensorValue.ToString();
         sensorText.transform.LookAt(Camera.main.transform);
         sensorText.transform.Rotate(new Vector3(0, 180, 0));
 
@@ -94,7 +97,6 @@ public class Sensor : MonoBehaviour
         Vector3 objPos = this.GetComponent<Transform>().position;
         Vector3 playerPos = playerObject.transform.position;
         float angle = Mathf.Atan2(objPos.z - playerPos.z, objPos.x - playerPos.x);
-        sensorText.text = angle.ToString();
         if (angle > 1.5708f)
         {
             angle -= 1.5708f;
@@ -104,7 +106,7 @@ public class Sensor : MonoBehaviour
         }
         
         Vector3 a = objPos;
-        Vector3 b = this.GetComponent<Transform>().position + new Vector3(Mathf.Cos(angle), 1, Mathf.Sin(angle));
+        Vector3 b = objPos + new Vector3(Mathf.Cos(angle), 1, Mathf.Sin(angle));
 
         RectTransform sensorTextRT = sensorText.GetComponent<RectTransform>();
         float t = 0;
