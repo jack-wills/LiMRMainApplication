@@ -121,10 +121,6 @@ namespace OculusSampleFramework
             {
                 if (m_target != null)
                 {
-                    if(m_otherHand == null)
-                    {
-                        Debug.Log("other hand null");
-                    }
                     m_target.Targeted = m_otherHand.m_target == m_target;
                 }
                 if(m_target != null)
@@ -187,7 +183,6 @@ namespace OculusSampleFramework
                     if (m_grabbedObj.snapOffset)
                     {
                         m_grabbedObjectRotOff = m_grabbedObj.snapOffset.rotation * m_grabbedObjectRotOff;
-                        if (m_controller == OVRInput.Controller.LTouch) m_grabbedObjectRotOff = Quaternion.Inverse(m_grabbedObjectRotOff);
                     }
                 }
 

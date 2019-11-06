@@ -62,6 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Highlight.cs" />
+    <Compile Include="Assets\NewBehaviourScript.cs" />
+    <Compile Include="Assets\object3dhit.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
@@ -203,6 +206,7 @@
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\CloudStorageMetadata.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\CloudStorageUpdateResponse.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\DeserializeableList.cs" />
+    <Compile Include="Assets\Oculus\Platform\Scripts\Models\Destination.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\Error.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\HttpTransferUpdate.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\InstalledApplication.cs" />
@@ -344,6 +348,7 @@
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationInterface.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationMaterial.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationSettings.cs" />
+    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPSettings.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPVersion.cs" />
     <Compile Include="Assets\Oculus\VoiceMod\Scenes\Scripts\VoiceModDemo_Logic.cs" />
     <Compile Include="Assets\Oculus\VoiceMod\Scenes\Scripts\VoiceModEnableSwitch.cs" />
@@ -355,6 +360,7 @@
     <Compile Include="Assets\script.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Sensor.cs" />
+    <Compile Include="Assets\SensorController.cs" />
     <Compile Include="Assets\SimpleJSON.cs" />
     <Compile Include="Assets\Teleport.cs" />
     <Compile Include="Assets\Tutorial_Info\Scripts\Readme.cs" />
