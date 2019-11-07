@@ -7,10 +7,10 @@ public class Sensor : MonoBehaviour
 {
 
     public float fadeTime;
-    public GameObject playerObject;
     public Color lineColour;
     public string sensorID;
 
+    private GameObject playerObject;
     private LineRenderer lineRenderer;
     private Text sensorText;
     private Canvas sensorTextCanvas;
@@ -18,6 +18,7 @@ public class Sensor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerObject = GameObject.Find("OVRPlayerController");
         GameObject sensorTextCanvasGO = new GameObject("Canvas");
         RectTransform sensorTextCanvasTrans = sensorTextCanvasGO.AddComponent<RectTransform>();
         sensorTextCanvasTrans.anchoredPosition = new Vector2(0, 0);
@@ -64,7 +65,7 @@ public class Sensor : MonoBehaviour
         objPos.y = 0;
         playerPos.y = 0;
         float angle = Mathf.Atan2(objPos.z - playerPos.z, objPos.x - playerPos.x) * Mathf.Rad2Deg;
-        float sensorValue = GameObject.FindGameObjectWithTag("SensorController").GetComponent<SensorController>().GetSensorValue(sensorID);
+        float sensorValue = GameObject.Find("SensorController").GetComponent<SensorController>().GetSensorValue(sensorID);
         sensorText.text = sensorValue.ToString();
         sensorText.transform.LookAt(Camera.main.transform);
         sensorText.transform.Rotate(new Vector3(0, 180, 0));
