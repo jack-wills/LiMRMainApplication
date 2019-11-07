@@ -4,3 +4,4 @@ obj/
 Library/
 *.*proj
 *.sln
+.vs/
