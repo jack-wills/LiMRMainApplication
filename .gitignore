@@ -1,2 +1,6 @@
 Build/
 Temp/
+obj/
+Library/
+*.*proj
+*.sln
