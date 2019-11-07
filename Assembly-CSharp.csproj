@@ -357,6 +357,7 @@
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Sensor.cs" />
     <Compile Include="Assets\SensorController.cs" />
+    <Compile Include="Assets\SensorThreshold.cs" />
     <Compile Include="Assets\SimpleJSON.cs" />
     <Compile Include="Assets\Teleport.cs" />
     <Compile Include="Assets\Tutorial_Info\Scripts\Readme.cs" />

@@ -59,7 +59,7 @@ public class SensorController : MonoBehaviour
             }
             else
             {
-                Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                //Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                 var json = JSON.Parse(webRequest.downloadHandler.text);
                 string sensorValuesString = json["sensorValues"];
 

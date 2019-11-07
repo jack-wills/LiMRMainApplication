@@ -9,6 +9,8 @@ public class Sensor : MonoBehaviour
     public float fadeTime;
     public Color lineColour;
     public string sensorID;
+    public float sensorValue;
+    public bool hidden = true;
 
     private GameObject playerObject;
     private LineRenderer lineRenderer;
@@ -37,7 +39,7 @@ public class Sensor : MonoBehaviour
         sensorText = sensorTextGO.AddComponent<Text>();
         sensorText.color = new Color(0, 0, 0, 0);
         sensorText.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-        sensorText.fontSize = 50;
+        sensorText.fontSize = 25;
 
         sensorTextCanvas.renderMode = RenderMode.WorldSpace;
         lineRenderer = gameObject.AddComponent<LineRenderer>();
@@ -65,14 +67,15 @@ public class Sensor : MonoBehaviour
         objPos.y = 0;
         playerPos.y = 0;
         float angle = Mathf.Atan2(objPos.z - playerPos.z, objPos.x - playerPos.x) * Mathf.Rad2Deg;
-        float sensorValue = GameObject.Find("SensorController").GetComponent<SensorController>().GetSensorValue(sensorID);
-        sensorText.text = sensorValue.ToString();
+        sensorValue = GameObject.Find("SensorController").GetComponent<SensorController>().GetSensorValue(sensorID);
+        sensorText.text = sensorID + ":\n" + sensorValue.ToString();
         sensorText.transform.LookAt(Camera.main.transform);
         sensorText.transform.Rotate(new Vector3(0, 180, 0));
 
     }
     public void Show()
     {
+        hidden = false;
         Material materialColored = new Material(Shader.Find("Diffuse"));
         materialColored.color = new Color(0.5f,1,1);
         this.GetComponent<Renderer>().material = materialColored;
@@ -83,6 +86,7 @@ public class Sensor : MonoBehaviour
     }
     public void Hide()
     {
+        hidden = true;
         Material materialColored = new Material(Shader.Find("Diffuse"));
         materialColored.color = new Color(1, 1, 1);
         this.GetComponent<Renderer>().material = materialColored;
