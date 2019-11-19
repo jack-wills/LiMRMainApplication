@@ -17,7 +17,7 @@ public class Robot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 robotCoord = new Vector2(sensorController.GetSensorValue("robotCoordX"), sensorController.GetSensorValue("robotCoordY"));
+        Vector2 robotCoord = new Vector2(sensorController.GetSensorValue("robotGoToX"), sensorController.GetSensorValue("robotGoToY"));
         Vector3 objPos = this.GetComponent<Transform>().position;
         if (robotCoord.x != objPos.x || robotCoord.y != objPos.y)
         {
@@ -31,7 +31,7 @@ public class Robot : MonoBehaviour
         Vector3 objPos = this.GetComponent<Transform>().position;
 
         Vector3 a = objPos;
-        Vector3 b = new Vector3(robotCoord.x, objPos.y, robotCoord.y);
+        Vector3 b = new Vector3(robotCoord.x, 0, robotCoord.y);
         
         float t = 0;
         while (t <= 1.0f)
