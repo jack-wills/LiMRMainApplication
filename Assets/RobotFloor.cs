@@ -4,22 +4,24 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Text;
 
-public class PostData : MonoBehaviour
+public class RobotFloor : MonoBehaviour
 {
-    private string url = "https://bmgxwpyyd2.execute-api.us-east-1.amazonaws.com/prod/sensordata";
-    public string sensorID;
-    public string value;
+    public GameObject robotPointerCursor;
+    public GameObject ghostRobot;
 
-    public void ButtonPress()
+    private string url = "https://bmgxwpyyd2.execute-api.us-east-1.amazonaws.com/prod/sensordata";
+
+    public void MoveRobot()
     {
-        StartCoroutine(PostRequest(url));
+        ghostRobot.GetComponent<Transform>().position = robotPointerCursor.GetComponent<Transform>().position;
+        StartCoroutine(PostRequest(url, ghostRobot.GetComponent<Transform>().position));
     }
 
-    IEnumerator PostRequest(string uri)
+    IEnumerator PostRequest(string uri, Vector3 position)
     {
 
         var request = new UnityWebRequest(url, "POST");
-        byte[] bodyRaw = Encoding.UTF8.GetBytes("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"" + sensorID + "\\\":\\\"" + value + "\\\"}\" }");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"robotGoToX\\\":\\\"" + position.x + "\\\", \\\"robotGoToY\\\":\\\"" + position.z + "\\\"}\" }");
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");

@@ -16,6 +16,7 @@ public class Sensor : MonoBehaviour
     private LineRenderer lineRenderer;
     private Text sensorText;
     private Canvas sensorTextCanvas;
+    private SensorController sensorController;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,7 @@ public class Sensor : MonoBehaviour
             new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(0.0f, 1.0f) }
         );
         lineRenderer.colorGradient = gradient;
+        sensorController = GameObject.Find("SensorController").GetComponent<SensorController>();
     }
 
     // Update is called once per frame
@@ -67,7 +69,7 @@ public class Sensor : MonoBehaviour
         objPos.y = 0;
         playerPos.y = 0;
         float angle = Mathf.Atan2(objPos.z - playerPos.z, objPos.x - playerPos.x) * Mathf.Rad2Deg;
-        sensorValue = GameObject.Find("SensorController").GetComponent<SensorController>().GetSensorValue(sensorID);
+        sensorValue = sensorController.GetSensorValue(sensorID);
         sensorText.text = sensorID + ":\n" + sensorValue.ToString();
         sensorText.transform.LookAt(Camera.main.transform);
         sensorText.transform.Rotate(new Vector3(0, 180, 0));
