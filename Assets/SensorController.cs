@@ -33,15 +33,19 @@ public class SensorController : MonoBehaviour
 
     public float GetSensorValue(string sensorID)
     {
-        if (sensorValues[sensorID] != null)
+        if (sensorValues != null)
         {
-            return sensorValues[sensorID].AsFloat;
+            if (sensorValues[sensorID] != null)
+            {
+                return sensorValues[sensorID].AsFloat;
+            }
+            else
+            {
+                Debug.LogError("\"" + sensorID + "\" is not a valid sensor ID.");
+                return 0;
+            }
         }
-        else
-        {
-            Debug.LogError("\"" + sensorID + "\" is not a valid sensor ID.");
-            return 0;
-        }
+        return 0;
     }
 
     public string GetSensorValueString(string sensorID)
