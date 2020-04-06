@@ -71,19 +71,24 @@ public class ImageDisplay : MonoBehaviour
                 XmlDocument xml = new XmlDocument();
                 xml.LoadXml(webRequest.downloadHandler.text);
                 XmlNodeList body = xml.GetElementsByTagName("Body");
-                try
+                if (body[0] != null)
                 {
-                    Debug.Log(body[0].InnerText);
-                    var json = JSON.Parse(body[0].InnerText);
-                    float x = float.Parse(json["x"]);
-                    float y = float.Parse(json["y"]);
-                    float z = float.Parse(json["z"]);
-                    float angle = float.Parse(json["angle"]);
-                    string url = json["url"];
-                    CreateNewImage(url, x, y, z, angle);
-                } catch (Exception e)
-                {
-                    Debug.Log(e.ToString());
+                    try
+                    {
+                        string receiptHandle = xml.GetElementsByTagName("ReceiptHandle")[0].InnerText;
+                        Debug.Log(body[0].InnerText);
+                        var json = JSON.Parse(body[0].InnerText);
+                        float x = float.Parse(json["x"]);
+                        float y = float.Parse(json["y"]);
+                        float z = float.Parse(json["z"]);
+                        float angle = float.Parse(json["angle"]);
+                        string url = json["url"];
+                        CreateNewImage(url, x, y, z, angle);
+                        StartCoroutine(GetRequest("https://sqs.us-east-1.amazonaws.com/592986159531/ImageQueue?Action=DeleteMessage&ReceiptHandle=" + UnityWebRequest.EscapeURL(receiptHandle) + "&Version=2012-11-05"));
+                    } catch (Exception e)
+                    {
+                        Debug.Log(e.ToString());
+                    }
                 }
             }
         }
