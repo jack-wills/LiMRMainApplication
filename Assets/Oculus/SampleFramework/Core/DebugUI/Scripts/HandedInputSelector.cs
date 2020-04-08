@@ -19,6 +19,7 @@ public class HandedInputSelector : MonoBehaviour
     OVRCameraRig m_CameraRig;
     OVRInputModule m_InputModule;
 
+
     void Start()
     {
         m_CameraRig = FindObjectOfType<OVRCameraRig>();

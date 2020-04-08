@@ -9,6 +9,9 @@ public class Menu : MonoBehaviour
     private OVRPhysicsRaycaster ovrPhysicsRaycaster;
     private LaserPointer laserPointer;
     private GameObject robotCursor, sensorCursor;
+    public GameObject ControlStatus;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,7 @@ public class Menu : MonoBehaviour
         laserPointer = GameObject.Find("LaserPointer").GetComponent<LaserPointer>();
         sensorCursor = GameObject.Find("SensorPointerCursor");
         robotCursor = GameObject.Find("RobotPointerCursor");
+        
 
 
         ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("SensorPointerSelect");
@@ -46,4 +50,26 @@ public class Menu : MonoBehaviour
             }
         }
     }
+
+    public void SliderChanged()
+    {
+            if (isPointerForRobot)
+            {
+                isPointerForRobot = false;
+                ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("SensorPointerSelect");
+                laserPointer.cursorVisual = sensorCursor;
+                sensorCursor.SetActive(true);
+                robotCursor.SetActive(false);
+            }
+            else
+            {
+                isPointerForRobot = true;
+                ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("RobotPointerSelect");
+                laserPointer.cursorVisual = robotCursor;
+                sensorCursor.SetActive(false);
+                robotCursor.SetActive(true);
+            }
+
+    }
+
 }
