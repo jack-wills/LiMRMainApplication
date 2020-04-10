@@ -59,11 +59,6 @@ public class DroneMovementScript : MonoBehaviour
             titltAmountForward = Mathf.SmoothDamp(titltAmountForward, 20 * Input.GetAxis("Vertical"), ref tiltVelocityFoward, 0.1f);
         }
 
-       // if (Input.GetKey(KeyCode.K))
-       // {
-        //    ourDrone.AddRelativeForce(Vector3.forward * -movementForwardSpeed);
-        //    titltAmountForward = Mathf.SmoothDamp(-titltAmountForward, -20, ref tiltVelocityFoward, -0.01f);
-       // }
     }
 
     private float wantedYRotation;
@@ -87,6 +82,7 @@ public class DroneMovementScript : MonoBehaviour
     }
 
     private Vector3 velocityToSmoothDampToZero;
+
     void ClampingSpeedValues()
     {
         if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.2f && Mathf.Abs(Input.GetAxis("Horizontal")) > 0.2f)
