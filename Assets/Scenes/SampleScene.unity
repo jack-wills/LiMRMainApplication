@@ -1296,7 +1296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drone: {fileID: 0}
-  sensorID: Aldronecords
+  sensorID: ALdronecords
 --- !u!1 &114617310
 GameObject:
   m_ObjectHideFlags: 0
@@ -7671,8 +7671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d134abd31ecc26342b3aa2702b0342c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  postData: {fileID: 113187298}
-  postData2: {fileID: 0}
+  postData: {fileID: 113187299}
   Drone: {fileID: 0}
 --- !u!1001 &763760454
 PrefabInstance:
