@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ExcludeTeleport
+  - projectile
+  - FxTemporaire
+  - TeleportIgnore
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - SensorPointerSelect
   - RobotPointerSelect
   - Ground
-  - 
+  - ML_prediction_true
   - 
   - 
   - 
