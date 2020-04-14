@@ -6,9 +6,13 @@ using System.Text;
 
 public class PostDataCords : MonoBehaviour
 {
+    public GameObject robot;
     public GameObject drone;
+    
     private Vector3 Cords;
     private Vector3 Rots;
+
+    private Vector3 robotCords;
 
     private string url = "https://bmgxwpyyd2.execute-api.us-east-1.amazonaws.com/prod/sensordata";
     public string sensorID;
@@ -18,6 +22,7 @@ public class PostDataCords : MonoBehaviour
     void Start()
     {
         drone = GameObject.Find("AxisLockedDrone");
+        robot = GameObject.Find("Robot");
     }
 
     // Update is called once per frame
@@ -25,6 +30,7 @@ public class PostDataCords : MonoBehaviour
     {
         Cords = drone.transform.position;
         Rots = drone.transform.eulerAngles;
+        robotCords = robot.transform.position;
 
         //value = writeVectorProperly(Cords);
         
@@ -35,14 +41,16 @@ public class PostDataCords : MonoBehaviour
     public void SendCords()
     {
         
-        StartCoroutine(PostRequest(url, Cords, Rots));
+        StartCoroutine(PostRequest(url, Cords, Rots, robotCords));
     }
 
-    IEnumerator PostRequest(string uri, Vector3 position, Vector3 rotation)
+    IEnumerator PostRequest(string uri, Vector3 position, Vector3 rotation, Vector3 robotPosition)
     {
 
         var request = new UnityWebRequest(url, "POST");
-        byte[] bodyRaw = Encoding.UTF8.GetBytes("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"Drone.Roty\\\":\\\"" + rotation.y + "\\\", \\\"Drone.Posy\\\":\\\"" + position.y + "\\\", \\\"Drone.Rotx\\\":\\\"" + rotation.x + "\\\"}\" }");
+        //byte[] bodyRaw = Encoding.UTF8.GetBytes("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"Drone.Roty\\\":\\\"" + rotation.y + "\\\", \\\"Drone.Posy\\\":\\\"" + position.y + "\\\", \\\"Drone.Rotx\\\":\\\"" + rotation.x + "\\\"}\" }");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"droneImageRot\\\":\\\"" + rotation.y + "\\\", \\\"droneImageY\\\":\\\"" + position.y + "\\\", \\\"droneImageX\\\":\\\"" + robotPosition.x + "\\\", \\\"droneImageZ\\\":\\\"" + robotPosition.z + "\\\"}\" }");
+
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
