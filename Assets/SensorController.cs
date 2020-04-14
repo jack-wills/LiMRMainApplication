@@ -14,6 +14,8 @@ public class SensorController : MonoBehaviour
     public float period = 1.0f;
     private JSONNode sensorValues;
     // Start is called before the first frame update
+    public GameObject ML_Prediction_false;
+    public GameObject ML_Prediction_true;
     void Start()
     {
         StartCoroutine(GetRequest(url));
@@ -29,7 +31,21 @@ public class SensorController : MonoBehaviour
             StartCoroutine(GetRequest(url));
             // execute block of code here
         }
+        //ml prediction warning sign
+        float CurrentNum = GetSensorValue("ml_prediction");
+        if (CurrentNum == -1)
+        {
+            ML_Prediction_false.SetActive(true);
+            ML_Prediction_true.SetActive(false);
+        }
+        else if (CurrentNum == 1)
+        {
+            ML_Prediction_true.SetActive(true);
+            ML_Prediction_false.SetActive(false);
+        }
     }
+
+  
 
     public float GetSensorValue(string sensorID)
     {
