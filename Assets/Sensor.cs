@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -109,11 +108,11 @@ public class Sensor : MonoBehaviour
             angle -= 1.5708f;
         } else
         {
-            angle += 1.5708f;
+            angle += 3.1416f;
         }
         
         Vector3 a = objPos;
-        Vector3 b = objPos + new Vector3(Mathf.Cos(angle), 1, Mathf.Sin(angle));
+        Vector3 b = objPos + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 
         RectTransform sensorTextRT = sensorText.GetComponent<RectTransform>();
         float t = 0;
