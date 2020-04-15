@@ -28,9 +28,9 @@ public class PostDataCords : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cords = drone.transform.position;
+        Cords = drone.transform.localPosition;
         Rots = drone.transform.eulerAngles;
-        robotCords = robot.transform.position;
+        robotCords = robot.transform.localPosition;
 
         //value = writeVectorProperly(Cords);
         
@@ -49,6 +49,7 @@ public class PostDataCords : MonoBehaviour
 
         var request = new UnityWebRequest(url, "POST");
         //byte[] bodyRaw = Encoding.UTF8.GetBytes("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"Drone.Roty\\\":\\\"" + rotation.y + "\\\", \\\"Drone.Posy\\\":\\\"" + position.y + "\\\", \\\"Drone.Rotx\\\":\\\"" + rotation.x + "\\\"}\" }");
+        Debug.Log("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"droneImageRot\\\":\\\"" + rotation.y + "\\\", \\\"droneImageY\\\":\\\"" + position.y + "\\\", \\\"droneImageX\\\":\\\"" + robotPosition.x + "\\\", \\\"droneImageZ\\\":\\\"" + robotPosition.z + "\\\"}\" }");
         byte[] bodyRaw = Encoding.UTF8.GetBytes("{\"timestamp\": \"" + System.DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "\", \"sensorValues\": \"{\\\"droneImageRot\\\":\\\"" + rotation.y + "\\\", \\\"droneImageY\\\":\\\"" + position.y + "\\\", \\\"droneImageX\\\":\\\"" + robotPosition.x + "\\\", \\\"droneImageZ\\\":\\\"" + robotPosition.z + "\\\"}\" }");
 
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);

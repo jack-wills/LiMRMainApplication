@@ -28,7 +28,7 @@ public class Post_Cords_ALDrone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetKey(KeyCode.P) || OVRInput.GetDown(OVRInput.Button.Start))
         {
             //Was used for testing Drone.SetActive(true);
             //postData.ButtonPress();

@@ -37,7 +37,7 @@ public class ImageDisplay : MonoBehaviour
         img1obj.transform.SetParent(this.gameObject.transform);
         RawImage img1 = img1obj.AddComponent(typeof(RawImage)) as RawImage;
         img1.rectTransform.sizeDelta = new Vector2(1, 1);
-        img1.rectTransform.position = new Vector3(x, z, y);
+        img1.rectTransform.localPosition = new Vector3(x, y-0.5f, z);
         img1.rectTransform.eulerAngles = new Vector3(0, angle, 0);
         StartCoroutine(DownloadImage(url, img1));
     }

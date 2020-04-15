@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
     private bool isPointerForRobot = false;
     private OVRPhysicsRaycaster ovrPhysicsRaycaster;
     private LaserPointer laserPointer;
-    private GameObject robotCursor, sensorCursor;
+    public GameObject robotCursor, sensorCursor;
     public GameObject ControlStatus;
 
 
@@ -17,8 +17,8 @@ public class Menu : MonoBehaviour
     {
         ovrPhysicsRaycaster = GameObject.Find("OVRCameraRig").GetComponent<OVRPhysicsRaycaster>();
         laserPointer = GameObject.Find("LaserPointer").GetComponent<LaserPointer>();
-        sensorCursor = GameObject.Find("SensorPointerCursor");
-        robotCursor = GameObject.Find("RobotPointerCursor");
+        //sensorCursor = GameObject.Find("SensorPointerCursor");
+        //robotCursor = GameObject.Find("RobotPointerCursor");
         
 
 
@@ -53,22 +53,6 @@ public class Menu : MonoBehaviour
 
     public void SliderChanged()
     {
-            if (isPointerForRobot)
-            {
-                isPointerForRobot = false;
-                ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("SensorPointerSelect");
-                laserPointer.cursorVisual = sensorCursor;
-                sensorCursor.SetActive(true);
-                robotCursor.SetActive(false);
-            }
-            else
-            {
-                isPointerForRobot = true;
-                ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("RobotPointerSelect");
-                laserPointer.cursorVisual = robotCursor;
-                sensorCursor.SetActive(false);
-                robotCursor.SetActive(true);
-            }
 
     }
 
