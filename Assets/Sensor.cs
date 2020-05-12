@@ -58,6 +58,9 @@ public class Sensor : MonoBehaviour
         );
         lineRenderer.colorGradient = gradient;
         sensorController = GameObject.Find("SensorController").GetComponent<SensorController>();
+
+        RectTransform sensorTextRT = sensorText.GetComponent<RectTransform>();
+        sensorTextRT.position = this.GetComponent<Transform>().position;
     }
 
     // Update is called once per frame

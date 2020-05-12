@@ -8,8 +8,9 @@ public class Menu : MonoBehaviour
     private bool isPointerForRobot = false;
     private OVRPhysicsRaycaster ovrPhysicsRaycaster;
     private LaserPointer laserPointer;
+    private bool isDroneMove = false;
     public GameObject robotCursor, sensorCursor;
-    public GameObject ControlStatus;
+    private OVRPlayerController playerObject;
 
 
     // Start is called before the first frame update
@@ -26,34 +27,62 @@ public class Menu : MonoBehaviour
         laserPointer.cursorVisual = sensorCursor;
         sensorCursor.SetActive(true);
         robotCursor.SetActive(false);
+        playerObject = GameObject.Find("OVRPlayerController").GetComponent<OVRPlayerController>(); ;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.Two))
+        transform.position = new Vector3(transform.position.x, 0.44f, transform.position.z);
+        if (OVRInput.GetDown(OVRInput.RawButton.Y))
         {
-            if (isPointerForRobot)
+
+            if (isDroneMove)
             {
-                isPointerForRobot = false;
-                ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("SensorPointerSelect");
-                laserPointer.cursorVisual = sensorCursor;
-                sensorCursor.SetActive(true);
-                robotCursor.SetActive(false);
-            } else
+                playerObject.move = true;
+                isDroneMove = false;
+            }
+            else
             {
-                isPointerForRobot = true;
-                ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("RobotPointerSelect");
-                laserPointer.cursorVisual = robotCursor;
-                sensorCursor.SetActive(false);
-                robotCursor.SetActive(true);
+                playerObject.move = false;
+                isDroneMove = true;
+            }
+            isPointerForRobot = true;
+            ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("RobotPointerSelect");
+            laserPointer.cursorVisual = robotCursor;
+            sensorCursor.SetActive(false);
+            robotCursor.SetActive(true);
+        }
+        if (isDroneMove)
+        {
+        }
+        else
+        {
+            if (OVRInput.GetDown(OVRInput.Button.Two))
+            {
+                if (isPointerForRobot)
+                {
+                    isPointerForRobot = false;
+                    ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("SensorPointerSelect");
+                    laserPointer.cursorVisual = sensorCursor;
+                    sensorCursor.SetActive(true);
+                    robotCursor.SetActive(false);
+                }
+                else
+                {
+                    isPointerForRobot = true;
+                    ovrPhysicsRaycaster.eventMask = LayerMask.GetMask("RobotPointerSelect");
+                    laserPointer.cursorVisual = robotCursor;
+                    sensorCursor.SetActive(false);
+                    robotCursor.SetActive(true);
+                }
             }
         }
     }
 
-    public void SliderChanged()
+    public bool IsDroneMove()
     {
-
+        return isDroneMove;
     }
 
 }

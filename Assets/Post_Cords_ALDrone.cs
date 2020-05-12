@@ -15,13 +15,11 @@ public class Post_Cords_ALDrone : MonoBehaviour
     private string url = "https://bmgxwpyyd2.execute-api.us-east-1.amazonaws.com/prod/sensordata";
     private string droneID;
     private string height;
-    public GameObject Drone;
+    private GameObject Drone;
 
 
     private void Start()
     {
-        Drone = GameObject.Find("AxisLockedDrone");
-        Drone.SetActive(true);
 
     }
 
@@ -32,13 +30,9 @@ public class Post_Cords_ALDrone : MonoBehaviour
         {
             //Was used for testing Drone.SetActive(true);
             //postData.ButtonPress();
-            postData.SendCords();
-            
+
         }
 
     }
-
- 
-
 }
 
